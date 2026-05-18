@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Pearls — český ženský vokální kvintet. Jazz, pop, rock, hudba první republiky a moderní aranže.">
+<meta property="og:title" content="The Pearls — Ženský Vokální Kvintet">
+<title>The Pearls — Ženský Vokální Kvintet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080808;
+  --bg2:#101010;
+  --bg3:#181818;
+  --pearl:#ffffff;
+  --pearl-dim:rgba(255,255,255,0.55);
+  --pearl-faint:rgba(255,255,255,0.1);
+  --gold:#ffffff;
+  --white:#f4f4f4;
+  --white-dim:rgba(244,244,244,0.58);
+  --white-faint:rgba(244,244,244,0.2);
+  --border:rgba(255,255,255,0.1);
+  --border-hi:rgba(255,255,255,0.28);
+  --glass:rgba(255,255,255,0.03);
+  --glass2:rgba(255,255,255,0.07);
+  --radius:2px;
+  --transition:600ms cubic-bezier(0.22,1,0.36,1);
+  --font:'Cormorant',serif;
+}
+
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:var(--font);
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--pearl-dim);border-radius:2px}
+
+/* ─── SELECTION ─── */
+::selection{background:var(--pearl-faint);color:var(--pearl)}
+
+/* ─── UTILITY ─── */
+.container{max-width:1240px;margin:0 auto;padding:0 40px}
+@media(max-width:768px){.container{padding:0 24px}}
+
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 900ms cubic-bezier(0.22,1,0.36,1),transform 900ms cubic-bezier(0.22,1,0.36,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-fade{opacity:0;transition:opacity 1000ms ease}
+.reveal-fade.visible{opacity:1}
+
+/* ─── NAVBAR ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:28px 0;
+  transition:all 600ms ease;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{
+  padding:18px 0;
+  background:rgba(8,8,8,0.88);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom-color:var(--border);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:center;
+  max-width:1240px;margin:0 auto;padding:0 40px;
+}
+@media(max-width:768px){.nav-inner{padding:0 24px}}
+.nav-logo{
+  font-family:var(--font);
+  font-weight:300;font-size:1.35rem;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--white);text-decoration:none;
+  display:flex;align-items:center;gap:12px;
+}
+.nav-logo img{
+  height:42px;
+  width:auto;
+  display:block;
+}
+@keyframes pulse{0%,100%{opacity:0.3;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
+
+/* ─── HERO ─── */
+#hero{
+  position:relative;height:100vh;min-height:700px;
+  display:flex;align-items:flex-end;
+  overflow:hidden;
+  background:var(--bg);
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-color:var(--bg);
+  background-image:url('images/main.jpeg');
+  background-size:cover;background-position:center top;
+  animation:heroZoom 20s ease-in-out infinite alternate;
+  filter:grayscale(80%) contrast(1.1);
+}
+@keyframes heroZoom{from{transform:scale(1)}to{transform:scale(1.04)}}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    170deg,
+    rgba(8,8,8,0.5) 0%,
+    rgba(8,8,8,0.3) 30%,
+    rgba(8,8,8,0.72) 65%,
+    rgba(8,8,8,0.97) 100%
+  );
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 40px 100px;
+  max-width:900px;
+}
+@media(max-width:768px){.hero-content{padding:0 24px 80px;max-width:100%}}
+.hero-eyebrow{
+  font-size:0.78rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--white-dim);margin-bottom:28px;
+  display:flex;align-items:center;gap:16px;
+  animation:fadeUp 1.2s 0.2s both ease;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--white-dim)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+.hero-title{
+  font-family:var(--font);
+  font-weight:300;font-size:clamp(3.5rem,8vw,7.5rem);
+  line-height:0.95;letter-spacing:-0.02em;
+  color:var(--white);margin-bottom:8px;
+  animation:fadeUp 1.2s 0.4s both ease;
+}
+.hero-title em{font-style:italic;color:var(--white)}
+
+.hero-logo{
+  width:min(700px, 90vw);
+  height:auto;
+  margin-bottom:32px;
+  margin-left: -130px;
+  display:block;
+  filter:
+    brightness(1.1)
+    contrast(1.05)
+    drop-shadow(0 10px 40px rgba(0,0,0,0.45));
+  animation:fadeUp 1.2s 0.4s both ease;
+}
+@media(max-width:768px){
+  .hero-logo{
+    margin-left: 0;
+  }
+}
+
+.hero-subtitle{
+  font-family:var(--font);
+  font-weight:300;font-style:italic;
+  font-size:clamp(1.4rem,3.5vw,2.8rem);
+  color:var(--white-dim);margin-bottom:36px;
+  animation:fadeUp 1.2s 0.6s both ease;
+}
+.hero-tagline{
+  font-size:1rem;letter-spacing:0.05em;
+  color:var(--white-dim);max-width:460px;
+  line-height:1.8;margin-bottom:52px;
+  animation:fadeUp 1.2s 0.8s both ease;
+}
+.hero-actions{
+  display:flex;gap:16px;flex-wrap:wrap;
+  animation:fadeUp 1.2s 1s both ease;
+}
+.btn-primary{
+  font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;
+  background:var(--white);color:var(--bg);
+  padding:15px 36px;text-decoration:none;
+  transition:all 400ms ease;font-weight:500;
+  font-family:var(--font);
+}
+.btn-primary:hover{background:#e0e0e0;transform:translateY(-2px)}
+.btn-outline{
+  font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;
+  border:1px solid var(--border-hi);color:var(--white);
+  padding:15px 36px;text-decoration:none;
+  transition:all 400ms ease;
+  backdrop-filter:blur(12px);
+  font-family:var(--font);
+}
+.btn-outline:hover{border-color:var(--white);color:var(--white);transform:translateY(-2px)}
+
+
+
+
+
+}
+@media(max-width:768px){}
+
+/* ─── SECTION SHARED ─── */
+section{padding:120px 0}
+@media(max-width:768px){section{padding:80px 0}}
+
+.section-label{
+  font-size:0.68rem;letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--white-dim);margin-bottom:20px;
+  display:flex;align-items:center;gap:14px;
+  font-family:var(--font);
+}
+.section-label::before{content:'';width:24px;height:1px;background:var(--white-dim)}
+
+.section-title{
+  font-family:var(--font);
+  font-weight:300;font-size:clamp(2.4rem,5vw,4.2rem);
+  line-height:1.05;color:var(--white);
+  margin-bottom:28px;
+}
+.section-title em{font-style:italic;color:var(--white)}
+
+.divider{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+  margin:0;
+}
+
+/* ─── ABOUT ─── */
+#about{background:var(--bg2)}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:100px;align-items:center;
+}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:60px}}
+.about-text p{
+  font-size:1.12rem;line-height:1.9;
+  color:var(--white-dim);margin-bottom:20px;
+}
+.about-text p:first-of-type{
+  font-family:var(--font);font-weight:300;
+  font-size:clamp(1.2rem,2.5vw,1.7rem);
+  line-height:1.6;color:var(--white);
+  margin-bottom:32px;
+}
+.about-tags{
+  display:flex;flex-wrap:wrap;gap:10px;margin-top:40px;
+}
+.about-tag{
+  font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;
+  border:1px solid var(--border);padding:8px 18px;
+  color:var(--white-dim);transition:all 300ms ease;
+  font-family:var(--font);
+}
+.about-tag:hover{border-color:var(--border-hi);color:var(--white)}
+.about-image{
+  position:relative;
+}
+.about-image img{
+  width:100%;aspect-ratio:3/4;object-fit:cover;
+  filter:grayscale(60%) contrast(1.1);
+  display:block;
+}
+.about-image-frame{
+  position:absolute;bottom:-20px;right:-20px;
+  width:100%;height:100%;
+  border:1px solid var(--border);
+  pointer-events:none;z-index:-1;
+}
+.about-stat{
+  position:absolute;top:-24px;left:-24px;
+  background:var(--bg);border:1px solid var(--border);
+  padding:20px 28px;backdrop-filter:blur(12px);
+}
+.about-stat-num{
+  font-family:var(--font);font-size:2.8rem;
+  color:var(--white);line-height:1;display:block;
+  font-weight:300;
+}
+.about-stat-label{
+  font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--white-faint);margin-top:4px;display:block;
+  font-family:var(--font);
+}
+
+/* ─── MEMBERS ─── */
+#members{background:var(--bg)}
+.members-intro{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;margin-bottom:80px;align-items:end;
+}
+@media(max-width:768px){.members-intro{grid-template-columns:1fr;gap:32px;margin-bottom:48px}}
+.members-intro p{
+  color:var(--white-dim);line-height:1.85;font-size:1rem;
+}
+.members-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:2px;
+}
+@media(max-width:1100px){.members-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.members-grid{grid-template-columns:repeat(2,1fr)}}
+
+.member-card{
+  position:relative;overflow:hidden;
+  cursor:pointer;
+  background:var(--bg2);
+}
+.member-img-wrap{
+  position:relative;overflow:hidden;
+  aspect-ratio:2/3;
+}
+.member-img-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  filter:grayscale(100%) contrast(1.1);
+  transition:filter 600ms ease,transform 700ms cubic-bezier(0.22,1,0.36,1);
+  display:block;
+}
+.member-card:hover .member-img-wrap img{
+  filter:grayscale(40%) contrast(1.05);
+  transform:scale(1.06);
+}
+.member-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,8,8,0.92) 0%,transparent 55%);
+  pointer-events:none;
+}
+.member-info{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:24px 20px 20px;
+}
+.member-name{
+  font-family:var(--font);font-weight:400;
+  font-size:1.15rem;color:var(--white);
+  letter-spacing:0.02em;margin-bottom:3px;display:block;
+}
+.member-role{
+  font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--white-dim);display:block;
+  font-family:var(--font);
+}
+
+/* ─── CONCERTS ─── */
+#concerts{background:var(--bg2)}
+.concerts-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:64px;flex-wrap:wrap;gap:24px;
+}
+.concerts-list{display:flex;flex-direction:column;gap:2px}
+.concert-item{
+  display:grid;
+  grid-template-columns:100px 1fr;
+  gap:32px;align-items:center;
+  padding:28px 36px;
+  background:var(--glass);
+  border:1px solid var(--border);
+  transition:all 400ms ease;
+  cursor:default;
+}
+@media(max-width:768px){
+  .concert-item{grid-template-columns:1fr;gap:12px;padding:24px}
+}
+.concert-item:hover{
+  background:var(--glass2);
+  border-color:var(--border-hi);
+  transform:translateX(4px);
+}
+.concert-date{
+  display:flex;flex-direction:column;align-items:flex-start;
+}
+.concert-day{
+  font-family:var(--font);font-size:2.4rem;font-weight:300;
+  color:var(--white);line-height:1;
+}
+.concert-month{
+  font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--white-faint);
+  font-family:var(--font);
+}
+.concert-details h3{
+  font-family:var(--font);font-weight:400;font-size:1.35rem;
+  color:var(--white);margin-bottom:6px;letter-spacing:0.02em;
+}
+.concert-details p{
+  font-size:0.9rem;color:var(--white-dim);
+  display:flex;align-items:center;gap:8px;
+  font-family:var(--font);
+}
+.concert-details p::before{content:'◦';color:var(--white-dim)}
+.concert-action a{
+  font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;
+  border:1px solid var(--border);color:var(--white-dim);
+  padding:11px 24px;text-decoration:none;
+  transition:all 300ms ease;white-space:nowrap;display:inline-block;
+  font-family:var(--font);
+}
+.concert-action a:hover{border-color:var(--white);color:var(--white);background:var(--pearl-faint)}
+.concert-sold{
+  font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--white-faint);
+  font-family:var(--font);
+}
+
+/* ─── MUSIC ─── */
+#music{background:var(--bg)}
+.music-grid{
+  display:grid;grid-template-columns:1.4fr 1fr;
+  gap:40px;margin-top:64px;
+}
+@media(max-width:900px){.music-grid{grid-template-columns:1fr}}
+.music-player-main{
+  background:var(--glass);border:1px solid var(--border);
+  overflow:hidden;
+}
+.music-player-main iframe{
+  width:100%;aspect-ratio:16/9;display:block;border:none;
+}
+.music-player-main .player-label{
+  padding:24px 28px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.player-label-text span:first-child{
+  font-family:var(--font);font-size:1.15rem;color:var(--white);
+  display:block;margin-bottom:4px;
+}
+.player-label-text span:last-child{
+  font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--white-dim);
+  font-family:var(--font);
+}
+.music-side{display:flex;flex-direction:column;gap:2px}
+.music-platform-card{
+  background:var(--glass);border:1px solid var(--border);
+  padding:28px;display:flex;align-items:center;gap:20px;
+  flex:1;transition:all 300ms ease;text-decoration:none;
+}
+.music-platform-card:hover{background:var(--glass2);border-color:var(--border-hi);transform:translateX(4px)}
+.platform-info span:first-child{
+  font-family:var(--font);font-size:1.1rem;color:var(--white);
+  display:block;margin-bottom:4px;
+}
+.platform-info span:last-child{
+  font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--white-dim);
+  font-family:var(--font);
+}
+
+/* ─── GALLERY ─── */
+#gallery{background:var(--bg2);padding-bottom:100px}
+.gallery-grid{
+  columns:3;gap:3px;
+  margin-top:64px;
+}
+@media(max-width:768px){.gallery-grid{columns:2}}
+@media(max-width:480px){.gallery-grid{columns:1}}
+.gallery-item{
+  break-inside:avoid;
+  position:relative;overflow:hidden;
+  margin-bottom:3px;cursor:pointer;
+}
+.gallery-item img{
+  width:100%;display:block;
+  transition:transform 600ms cubic-bezier(0.22,1,0.36,1),filter 400ms ease;
+  filter:grayscale(60%) brightness(0.88) contrast(1.1);
+}
+.gallery-item:hover img{transform:scale(1.03);filter:grayscale(0%) brightness(1) contrast(1)}
+.gallery-item-overlay{
+  position:absolute;inset:0;
+  background:rgba(8,8,8,0);
+  transition:background 300ms ease;
+  display:flex;align-items:center;justify-content:center;
+}
+.gallery-item:hover .gallery-item-overlay{background:rgba(8,8,8,0.2)}
+.gallery-item-overlay span{
+  font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(255,255,255,0);transition:color 300ms ease;
+  font-family:var(--font);
+}
+.gallery-item:hover .gallery-item-overlay span{color:rgba(255,255,255,0.75)}
+
+/* Lightbox */
+.lightbox{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,0.97);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity 400ms ease;
+}
+.lightbox.open{opacity:1;pointer-events:all}
+.lightbox img{
+  max-width:90vw;max-height:90vh;
+  object-fit:contain;
+}
+.lightbox-close{
+  position:absolute;top:28px;right:36px;
+  color:var(--white-dim);font-size:1.5rem;cursor:pointer;
+  background:none;border:none;
+  transition:color 200ms ease;font-weight:200;
+  font-family:var(--font);
+}
+.lightbox-close:hover{color:var(--white)}
+
+/* ─── CONTACT ─── */
+#contact{background:var(--bg)}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:100px;
+}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:60px}}
+.contact-info{display:flex;flex-direction:column;gap:44px}
+.contact-block h3{
+  font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--white-dim);margin-bottom:12px;
+  font-family:var(--font);
+}
+.contact-block p,.contact-block a{
+  font-family:var(--font);font-size:1.3rem;
+  color:var(--white);text-decoration:none;
+  font-weight:300;transition:color 300ms ease;display:block;
+}
+.contact-block a:hover{color:var(--white-dim)}
+.contact-socials{display:flex;flex-direction:column;gap:8px}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+
+.form-field{display:flex;flex-direction:column;gap:8px}
+.form-field label{
+  font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--white-faint);
+  font-family:var(--font);
+}
+.form-field input,.form-field textarea,.form-field select{
+  background:var(--glass);
+  border:1px solid var(--border);
+  padding:14px 18px;
+  color:var(--white);
+  font-family:var(--font);font-size:1rem;font-weight:300;
+  transition:border-color 300ms ease,background 300ms ease;
+  outline:none;resize:none;
+  appearance:none;
+}
+.form-field input::placeholder,.form-field textarea::placeholder{color:var(--white-faint)}
+.form-field input:focus,.form-field textarea:focus{
+  border-color:var(--border-hi);
+  background:var(--glass2);
+}
+.form-field textarea{height:140px}
+.form-submit{
+  font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;
+  background:var(--white);color:var(--bg);
+  border:none;padding:16px 40px;cursor:pointer;
+  font-family:var(--font);font-weight:500;
+  transition:all 300ms ease;align-self:flex-start;margin-top:8px;
+}
+.form-submit:hover{background:#e0e0e0;transform:translateY(-2px)}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--bg2);
+  border-top:1px solid var(--border);
+  padding:60px 0 40px;
+}
+.footer-logo-img {
+  width: 160px;
+  height: auto;
+  display: block;
+  margin-bottom: 20px;
+  margin-left: -30px;
+}
+.footer-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:40px;margin-bottom:60px;align-items:start;
+}
+@media(max-width:768px){.footer-inner{grid-template-columns:1fr;gap:48px}}
+.footer-logo{
+  font-family:var(--font);font-size:1.5rem;font-weight:300;
+  letter-spacing:0.2em;color:var(--white);margin-bottom:12px;
+  text-transform:uppercase;
+}
+.footer-brand p{
+  font-size:0.88rem;color:var(--white-faint);line-height:1.7;max-width:280px;
+  font-family:var(--font);
+}
+.footer-social h4{
+  font-size:0.65rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--white-dim);margin-bottom:20px;
+  font-family:var(--font);
+}
+.footer-social-links{display:flex;flex-direction:column;gap:10px}
+.footer-social-links a{
+  font-size:0.9rem;color:var(--white-dim);text-decoration:none;
+  transition:color 300ms ease;display:flex;align-items:center;gap:10px;
+  font-family:var(--font);
+}
+.footer-social-links a::before{content:'→';color:var(--white-dim);font-size:0.75rem}
+.footer-social-links a:hover{color:var(--white)}
+.footer-bottom{
+  border-top:1px solid var(--border);padding-top:28px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+}
+.footer-bottom p{
+  font-size:0.78rem;color:var(--white-faint);letter-spacing:0.08em;
+  font-family:var(--font);
+}
+.footer-bottom a{color:var(--white-dim);text-decoration:none}
+.footer-bottom a:hover{color:var(--white)}
+
+/* ─── GRAIN OVERLAY ─── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.3;
+}
+
+/* ─── MOBILE NAV MENU ─── */
+.mobile-menu{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(6,6,6,0.98);backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:36px;opacity:0;pointer-events:none;
+  transition:opacity 400ms ease;
+}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{
+  font-family:var(--font);font-size:2.4rem;font-weight:300;
+  color:var(--white);text-decoration:none;letter-spacing:0.08em;
+  transition:color 300ms ease;
+}
+.mobile-menu a:hover{color:var(--white-dim)}
+.mobile-close{
+  position:absolute;top:28px;right:36px;
+  background:none;border:none;color:var(--white-dim);
+  font-size:1.6rem;cursor:pointer;font-weight:200;
+}
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;
+  position:absolute;right:40px;}
+.hamburger span{width:22px;height:1px;background:var(--white-dim);transition:all 300ms ease;display:block}
+@media(max-width:900px){
+  .hamburger{display:flex}
+}
+
+/* ─── SIDE NAV ─── */
+.side-nav{
+  position:fixed;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:200;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:4px;
+  padding-right:32px;
+}
+.side-nav a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  cursor:pointer;
+  padding:4px 0;
+}
+.side-nav-label{
+  font-family:var(--font);
+  font-size:0.62rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--white-faint);
+  white-space:nowrap;
+  transition:color 350ms ease;
+}
+.side-nav-bar{
+  width:20px;
+  height:1px;
+  background:var(--white-faint);
+  transition:all 350ms ease;
+  flex-shrink:0;
+}
+.side-nav a:hover .side-nav-label{
+  color:var(--white-dim);
+}
+.side-nav a:hover .side-nav-bar{
+  background:var(--white-dim);
+  width:28px;
+}
+.side-nav a.active .side-nav-label{
+  color:var(--white);
+}
+.side-nav a.active .side-nav-bar{
+  background:var(--white);
+  width:32px;
+  height:2px;
+}
+@media(max-width:900px){.side-nav{display:none}}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+<a href="#" class="nav-logo">
+  <img src="images/logo.png"
+</a>    
+<button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#about" class="mobile-link">O nás</a>
+  <a href="#members" class="mobile-link">Členky</a>
+  <a href="#concerts" class="mobile-link">Koncerty</a>
+  <a href="#music" class="mobile-link">Hudba</a>
+  <a href="#gallery" class="mobile-link">Galerie</a>
+  <a href="#contact" class="mobile-link">Kontakt</a>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Český ženský vokální kvintet</p>
+<img src="images/logo.png" class="hero-logo">
+    <p class="hero-tagline">
+      Moderní vokální harmonie s nadčasovou emocí. Jazz, pop, soul<br>
+      a hudba, která pohladí duši a rozproudí krev.
+    </p>
+    </div>
+  </div>
+<span>Scroll</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="section-label">O nás</p>
+        <h2 class="section-title">Hudba, která<br><em>spojuje hlas a emoci</em></h2>
+        <p>
+      Jsme "holčičí" vokální kvintet, který se zaměřuje na vše co nás baví... jazz, soul, pop a různý mix a interpretace. Jsme specifická formace holek, které spolu zpívaly už dlouho a vykrystalizovaly v tento sólo projekt. Spolu fungujeme od léta 2024. Snažíme se neustále rozvíjet naše hudební schopnosti a přinášet nové a zajímavé aranžmá známých i méně známých písní a interpretů... Jsme rády, když rozproudíme krev a pohladíme duši všem, kdo nás poslouchají.
+        </p>
+        <p>
+          Každý koncert je intimní zážitek, ne pouhé vystoupení.
+        </p>
+        <div class="about-tags">
+          <span class="about-tag">Jazz</span>
+          <span class="about-tag">Soul</span>
+          <span class="about-tag">Pop</span>
+          <span class="about-tag">Rock</span>
+          <span class="about-tag">První republika</span>
+          <span class="about-tag">Moderní aranže</span>
+          <span class="about-tag">Vánoční repertoár</span>
+          <span class="about-tag">A cappella</span>
+        </div>
+      </div>
+
+      <div class="about-image reveal" style="transition-delay:200ms">
+        <div class="about-stat">
+          <span class="about-stat-num">5</span>
+          <span class="about-stat-label">hlasů v harmonii</span>
+        </div>
+        <img
+          src="images/main.jpeg"
+          alt="The Pearls na koncertě"
+          loading="lazy"
+        >
+        <div class="about-image-frame"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ MEMBERS ═══════════════ -->
+<section id="members">
+  <div class="container">
+    <div class="members-intro">
+      <div class="reveal">
+        <p class="section-label">Perly</p>
+        <h2 class="section-title">Pět hlasů,<br><em>pět příběhů</em></h2>
+      </div>
+      <p class="reveal" style="transition-delay:150ms">
+      </p>
+    </div>
+
+    <div class="members-grid reveal">
+      <!-- Míša Olšanová -->
+      <div class="member-card">
+        <div class="member-img-wrap">
+          <img src="images/MO.jpeg" alt="Míša Olšanová" loading="lazy">
+          <div class="member-overlay"></div>
+        </div>
+        <div class="member-info">
+          <span class="member-name">Míša Olšanová</span>
+          <span class="member-role">První alt</span>
+        </div>
+      </div>
+      <!-- Mili Pavelková -->
+      <div class="member-card">
+        <div class="member-img-wrap">
+          <img src="images/MP.jpeg" alt="Mili Pavelková" loading="lazy">
+          <div class="member-overlay"></div>
+        </div>
+        <div class="member-info">
+          <span class="member-name">Mili Pavelková</span>
+          <span class="member-role">První soprán</span>
+        </div>
+      </div>
+      <!-- Peťa Zvoníčková -->
+      <div class="member-card">
+        <div class="member-img-wrap">
+          <img src="images/PZ.jpeg" alt="Peťa Zvoníčková" loading="lazy">
+          <div class="member-overlay"></div>
+        </div>
+        <div class="member-info">
+          <span class="member-name">Peťa Zvoníčková</span>
+          <span class="member-role">Druhý alt</span>
+        </div>
+      </div>
+      <!-- Míša Koutná -->
+      <div class="member-card">
+        <div class="member-img-wrap">
+          <img src="images/MK.jpeg" alt="Míša Koutná" loading="lazy">
+          <div class="member-overlay"></div>
+        </div>
+        <div class="member-info">
+          <span class="member-name">Míša Koutná</span>
+          <span class="member-role">Soprán</span>
+        </div>
+      </div>
+      <!-- Zuza -->
+      <div class="member-card">
+        <div class="member-img-wrap">
+          <img src="images/ZS.jpeg" alt="Zuza Stanjurová Mateiciuc" loading="lazy">
+          <div class="member-overlay"></div>
+        </div>
+        <div class="member-info">
+          <span class="member-name">Zuza Stanjurová</span>
+          <span class="member-role">Mezzosoprán</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ CONCERTS ═══════════════ -->
+<section id="concerts">
+  <div class="container">
+    <div class="concerts-header">
+      <div class="reveal">
+        <h2 class="section-title">Koncerty</h2>
+      </div>
+      <p class="reveal" style="max-width:280px;color:var(--white-dim);font-size:0.95rem;line-height:1.7;transition-delay:150ms;font-family:var(--font)">
+      </p>
+    </div>
+
+    <div class="concerts-list reveal">
+      <div class="concert-item">
+        <div class="concert-date">
+          <span class="concert-day">10</span>
+          <span class="concert-month">Červenec 2026</span>
+        </div>
+        <div class="concert-details">
+          <h3>Perly na terase</h3>
+          <p>Terasa Obecního domu v Opavě</p>
+        </div>
+      </div>
+
+      <div class="concert-item">
+        <div class="concert-date">
+          <span class="concert-day">1</span>
+          <span class="concert-month">Srpen 2026</span>
+        </div>
+        <div class="concert-details">
+          <h3>Stráňské slavnosti</h3>
+          <p>Dlouhá Stráň u Bruntálu</p>
+        </div>
+      </div>
+
+      <div class="concert-item">
+        <div class="concert-date">
+          <span class="concert-day">20</span>
+          <span class="concert-month">Září 2026</span>
+        </div>
+        <div class="concert-details">
+          <h3>Bezručova Opava</h3>
+          <p>Breda, Opava</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ MUSIC ═══════════════ -->
+<section id="music">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Poslechnout</p>
+      <h2 class="section-title">Naše <em>hudba</em></h2>
+    </div>
+
+    <div class="music-grid">
+      <div class="music-player-main reveal">
+        <iframe
+          src="https://www.youtube.com/embed/fT8cJvEf9hQ?rel=0&modestbranding=1"
+          title="The Pearls — hudební video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+        <div class="player-label">
+          <div class="player-label-text">
+            <span>The Pearls — Live</span>
+            <span>YouTube · Vokální vystoupení</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="music-side reveal" style="transition-delay:200ms">
+        <a href="https://www.facebook.com/profile.php?id=61567085273524" target="_blank" rel="noopener" class="music-platform-card">
+          <div class="platform-info">
+            <span>Facebook</span>
+            <span>Sledujte nás · Aktuální videa</span>
+          </div>
+        </a>
+        <div class="music-platform-card" style="cursor:default">
+          <div class="platform-info">
+            <span>Spotify</span>
+            <span>Brzy dostupné</span>
+          </div>
+        </div>
+        <div class="music-platform-card" style="cursor:default">
+          <div class="platform-info">
+            <span>Bandcamp</span>
+            <span>Brzy dostupné</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ GALLERY ═══════════════ -->
+<section id="gallery">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Foto</p>
+      <h2 class="section-title">Galerie</h2>
+    </div>
+
+    <div class="gallery-grid reveal" style="transition-delay:150ms">
+      <div class="gallery-item" data-full="images/main.jpeg">
+        <img src="images/main.jpeg" alt="The Pearls na koncertě" loading="lazy">
+        <div class="gallery-item-overlay"><span>Zobrazit</span></div>
+      </div>
+      <div class="gallery-item" data-full="images/MO.jpeg">
+        <img src="images/MO.jpeg" alt="Míša Olšanová" loading="lazy">
+        <div class="gallery-item-overlay"><span>Zobrazit</span></div>
+      </div>
+      <div class="gallery-item" data-full="images/MP.jpeg">
+        <img src="images/MP.jpeg?ph=e061bdc809" alt="Mili Pavelková" loading="lazy">
+        <div class="gallery-item-overlay"><span>Zobrazit</span></div>
+      </div>
+      <div class="gallery-item" data-full="images/PZ.jpeg">
+        <img src="images/PZ.jpeg" alt="Peťa Zvoníčková" loading="lazy">
+        <div class="gallery-item-overlay"><span>Zobrazit</span></div>
+      </div>
+      <div class="gallery-item" data-full="images/MK.jpeg">
+        <img src="images/MK.jpeg" alt="Míša Koutná" loading="lazy">
+        <div class="gallery-item-overlay"><span>Zobrazit</span></div>
+      </div>
+      <div class="gallery-item"images/ZS.jpeg">
+        <img src="images/ZS.jpeg" alt="Zuza Stanjurová Mateiciuc" loading="lazy">
+        <div class="gallery-item-overlay"><span>Zobrazit</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Zavřít">✕</button>
+  <img id="lightboxImg" src="" alt="Galerie">
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div>
+          <p class="section-label">Kontakt</p>
+          <h2 class="section-title">Pojďme<br>tvořit <em>společně</em></h2>
+          <p style="color:var(--white-dim);line-height:1.8;font-size:1rem;margin-top:8px;max-width:360px;font-family:var(--font)">
+            Booking, spolupráce, dotazy — rádi si promluvíme.
+          </p>
+        </div>
+
+        <div class="contact-block">
+          <h3>Email</h3>
+          <a href="mailto:thepearls005@gmail.com">thepearls005@gmail.com</a>
+        </div>
+
+        <div class="contact-block">
+          <h3>Sociální sítě</h3>
+          <div class="contact-socials">
+            <a href="https://www.facebook.com/profile.php?id=61567085273524" target="_blank" rel="noopener">Facebook</a>
+          </div>
+        </div>
+
+        <div class="contact-block">
+          <h3>Booking</h3>
+          <p style="font-size:1rem;color:var(--white-dim);font-family:var(--font);line-height:1.7">
+            Soukromé akce, festivaly, firemní večírky, adventní a vánoční koncerty.
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay:200ms">
+        <div class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="name">Jméno a příjmení</label>
+              <input type="text" id="name" name="name" placeholder="Jana Nováková" autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="jana@example.cz" autocomplete="email">
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="subject">Typ poptávky</label>
+            <select id="subject" name="subject">
+              <option value="" disabled selected>Vyberte typ</option>
+              <option value="booking">Booking / vystoupení</option>
+              <option value="festival">Festival / akce</option>
+              <option value="private">Soukromá akce</option>
+              <option value="media">Media / tisk</option>
+              <option value="other">Jiné</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="message">Zpráva</label>
+            <textarea id="message" name="message" placeholder="Popište vaši poptávku, termín, místo konání..."></textarea>
+          </div>
+          <button type="button" class="form-submit" id="formSubmit">Odeslat zprávu</button>
+          <p id="formMsg" style="font-size:0.88rem;color:var(--white);opacity:0;transition:opacity 400ms ease;margin-top:8px;font-family:var(--font)"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+<img src="images/logo.png" alt="The Pearls" class="footer-logo-img">
+        <p>
+          ženský vokální kvintet.<br>
+          Harmonii tvoříme od léta 2024.
+        </p>
+      </div>
+
+      <div class="footer-social">
+        <h4>Sledujte nás</h4>
+        <div class="footer-social-links">
+          <a href="https://www.facebook.com/profile.php?id=61567085273524" target="_blank" rel="noopener">Facebook</a>
+          <a href="mailto:thepearls005@gmail.com">thepearls005@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 The Pearls. Všechna práva vyhrazena.</p>
+      <p>Web by Killswitch</p>
+      <p>Ženský vokální kvintet · <a href="https://www.thepearls.cz" target="_blank" rel="noopener">thepearls.cz</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── NAVBAR SCROLL ───
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+}, {passive:true});
+
+// ─── MOBILE MENU ───
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+
+hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+// ─── SCROLL REVEAL ───
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.12, rootMargin:'0px 0px -40px 0px'});
+
+document.querySelectorAll('.reveal, .reveal-fade').forEach(el => revealObserver.observe(el));
+
+// ─── GALLERY LIGHTBOX ───
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
+
+document.querySelectorAll('.gallery-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const full = item.dataset.full || item.querySelector('img').src;
+    lightboxImg.src = full;
+    lightboxImg.alt = item.querySelector('img').alt;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+lightboxClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if(e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+
+// ─── FORM SUBMIT ───
+document.getElementById('formSubmit').addEventListener('click', function() {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const msg = document.getElementById('formMsg');
+
+  if (!name || !email || !message) {
+    msg.textContent = 'Prosím vyplňte jméno, email a zprávu.';
+    msg.style.color = '#c97a6c';
+    msg.style.opacity = '1';
+    return;
+  }
+
+  this.textContent = 'Odesílání...';
+  this.style.opacity = '0.7';
+  setTimeout(() => {
+    this.textContent = 'Odesláno ✓';
+    this.style.background = 'var(--white)';
+    msg.textContent = 'Děkujeme! Ozveme se co nejdříve.';
+    msg.style.color = 'var(--white)';
+    msg.style.opacity = '1';
+    ['name','email','message'].forEach(id => document.getElementById(id).value = '');
+  }, 900);
+});
+
+// ─── SMOOTH ANCHOR SCROLL ───
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  });
+});
+
+// ─── SIDE NAV ACTIVE STATE ───
+(function(){
+  const links = document.querySelectorAll('.side-nav-link');
+  const sections = ['hero','about','members','concerts','music','gallery','contact']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  function setActive(id){
+    links.forEach(a => {
+      a.classList.toggle('active', a.dataset.section === id);
+    });
+  }
+
+  // Smooth scroll override for side nav
+  links.forEach(a => {
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // Active on scroll
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, {threshold:0.35});
+
+  sections.forEach(s => obs.observe(s));
+  setActive('hero');
+})();
+
+</script>
+
+<!-- ═══════════════ SIDE NAV ═══════════════ -->
+<nav class="side-nav" id="sideNav" aria-label="Boční navigace">
+  <a href="#hero" class="side-nav-link" data-section="hero">
+    <span class="side-nav-label">Úvod</span>
+    <span class="side-nav-bar"></span>
+  </a>
+  <a href="#about" class="side-nav-link" data-section="about">
+    <span class="side-nav-label">O nás</span>
+    <span class="side-nav-bar"></span>
+  </a>
+  <a href="#members" class="side-nav-link" data-section="members">
+    <span class="side-nav-label">Perly</span>
+    <span class="side-nav-bar"></span>
+  </a>
+  <a href="#concerts" class="side-nav-link" data-section="concerts">
+    <span class="side-nav-label">Koncerty</span>
+    <span class="side-nav-bar"></span>
+  </a>
+  <a href="#music" class="side-nav-link" data-section="music">
+    <span class="side-nav-label">Hudba</span>
+    <span class="side-nav-bar"></span>
+  </a>
+  <a href="#gallery" class="side-nav-link" data-section="gallery">
+    <span class="side-nav-label">Galerie</span>
+    <span class="side-nav-bar"></span>
+  </a>
+  <a href="#contact" class="side-nav-link" data-section="contact">
+    <span class="side-nav-label">Kontakt</span>
+    <span class="side-nav-bar"></span>
+  </a>
+</nav>
+
+</body>
+</html>
