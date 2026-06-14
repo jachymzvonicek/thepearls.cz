@@ -54,10 +54,10 @@ body{
 .container{max-width:1240px;margin:0 auto;padding:0 40px}
 @media(max-width:768px){.container{padding:0 24px}}
 
-.reveal{opacity:0;transform:translateY(36px);transition:opacity 900ms cubic-bezier(0.22,1,0.36,1),transform 900ms cubic-bezier(0.22,1,0.36,1)}
-.reveal.visible{opacity:1;transform:none}
-.reveal-fade{opacity:0;transition:opacity 1000ms ease}
-.reveal-fade.visible{opacity:1}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 900ms cubic-bezier(0.22,1,0.36,1),transform 900ms cubic-bezier(0.22,1,0.36,1);pointer-events:none}
+.reveal.visible{opacity:1;transform:none;pointer-events:auto}
+.reveal-fade{opacity:0;transition:opacity 1000ms ease;pointer-events:none}
+.reveal-fade.visible{opacity:1;pointer-events:auto}
 
 /* ─── NAVBAR ─── */
 nav{
@@ -472,6 +472,7 @@ section{padding:120px 0}
   background:rgba(8,8,8,0);
   transition:background 300ms ease;
   display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
 }
 .gallery-item:hover .gallery-item-overlay{background:rgba(8,8,8,0.2)}
 .gallery-item-overlay span{
@@ -483,7 +484,7 @@ section{padding:120px 0}
 
 /* Lightbox */
 .lightbox{
-  position:fixed;inset:0;z-index:1000;
+  position:fixed;inset:0;z-index:9999;
   background:rgba(0,0,0,0.97);
   display:flex;align-items:center;justify-content:center;
   opacity:0;pointer-events:none;
@@ -609,12 +610,7 @@ footer{
 .footer-bottom a{color:var(--white-dim);text-decoration:none}
 .footer-bottom a:hover{color:var(--white)}
 
-/* ─── GRAIN OVERLAY ─── */
-body::before{
-  content:'';position:fixed;inset:0;z-index:999;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity:0.3;
-}
+
 
 /* ─── MOBILE NAV MENU ─── */
 .mobile-menu{
@@ -656,6 +652,7 @@ body::before{
   align-items:flex-end;
   gap:4px;
   padding-right:32px;
+  pointer-events:none;
 }
 .side-nav a{
   display:flex;
@@ -664,6 +661,7 @@ body::before{
   text-decoration:none;
   cursor:pointer;
   padding:4px 0;
+  pointer-events:auto;
 }
 .side-nav-label{
   font-family:var(--font);
@@ -706,7 +704,7 @@ body::before{
 <nav id="navbar">
   <div class="nav-inner">
 <a href="#" class="nav-logo">
-  <img src="images/logo.png"
+  <img src="images/logo.png" alt="The Pearls">
 </a>    
 <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -732,15 +730,13 @@ body::before{
 
   <div class="hero-content">
     <p class="hero-eyebrow">Český ženský vokální kvintet</p>
-<img src="images/logo.png" class="hero-logo">
+    <img src="images/logo.png" class="hero-logo" alt="The Pearls">
     <p class="hero-tagline">
       Moderní vokální harmonie s nadčasovou emocí.
-Jazz, pop, soul a hudba, která pohladí duši a rozproudí krev.
+      Jazz, pop, soul a hudba, která pohladí duši a rozproudí krev.
     </p>
-    </div>
   </div>
-<span>Scroll</span>
-  </div>
+
 </section>
 
 <div class="divider"></div>
