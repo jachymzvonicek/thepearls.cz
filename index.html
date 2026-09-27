@@ -1088,6 +1088,8 @@ footer{
 
       <div class="reveal" style="transition-delay:200ms">
         <div class="contact-form" id="contactForm">
+          <input type="hidden" name="access_key" id="web3formsKey" value="2c756023-af59-41f6-8e8f-9f9ead20b1fb">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
           <div class="form-row">
             <div class="form-field">
               <label for="name">Jméno a příjmení</label>
@@ -1205,11 +1207,15 @@ lightboxClose.addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', e => { if(e.target === lightbox) closeLightbox(); });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
 
-// ─── FORM SUBMIT ───
+// ─── FORM SUBMIT (Web3Forms) ───
 document.getElementById('formSubmit').addEventListener('click', function() {
+  const btn = this;
   const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
+  const subjectSelect = document.getElementById('subject');
+  const subject = subjectSelect.options[subjectSelect.selectedIndex]?.text || '';
   const message = document.getElementById('message').value.trim();
+  const accessKey = document.getElementById('web3formsKey').value;
   const msg = document.getElementById('formMsg');
 
   if (!name || !email || !message) {
@@ -1219,16 +1225,56 @@ document.getElementById('formSubmit').addEventListener('click', function() {
     return;
   }
 
-  this.textContent = 'Odesílání...';
-  this.style.opacity = '0.7';
-  setTimeout(() => {
-    this.textContent = 'Odesláno ✓';
-    this.style.background = 'var(--white)';
-    msg.textContent = 'Děkujeme! Ozveme se co nejdříve.';
-    msg.style.color = 'var(--white)';
+  if (!accessKey || accessKey === 'VLOŽTE_SEM_SVUJ_ACCESS_KEY') {
+    msg.textContent = 'Formulář zatím není nastaven (chybí access key). Kontaktujte nás prosím emailem.';
+    msg.style.color = '#c97a6c';
     msg.style.opacity = '1';
-    ['name','email','message'].forEach(id => document.getElementById(id).value = '');
-  }, 900);
+    return;
+  }
+
+  const originalText = btn.textContent;
+  btn.textContent = 'Odesílání...';
+  btn.style.opacity = '0.7';
+  btn.disabled = true;
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      access_key: accessKey,
+      subject: `Nová poptávka z webu — ${subject || 'The Pearls'}`,
+      from_name: name,
+      name: name,
+      email: email,
+      typ_poptavky: subject,
+      message: message
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      btn.textContent = 'Odesláno ✓';
+      btn.style.background = 'var(--white)';
+      msg.textContent = 'Děkujeme! Ozveme se co nejdříve.';
+      msg.style.color = 'var(--white)';
+      msg.style.opacity = '1';
+      ['name','email','message'].forEach(id => document.getElementById(id).value = '');
+      subjectSelect.selectedIndex = 0;
+    } else {
+      throw new Error(data.message || 'Odeslání se nezdařilo.');
+    }
+  })
+  .catch(() => {
+    btn.textContent = originalText;
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    msg.textContent = 'Něco se nepovedlo. Zkuste to prosím znovu nebo napište na email přímo.';
+    msg.style.color = '#c97a6c';
+    msg.style.opacity = '1';
+  })
+  .finally(() => {
+    setTimeout(() => { btn.disabled = false; }, 1500);
+  });
 });
 
 // ─── SMOOTH ANCHOR SCROLL ───
