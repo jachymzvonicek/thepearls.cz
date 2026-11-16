@@ -442,6 +442,14 @@ section[hidden]{display:none}
 .concert-item.has-action{grid-template-columns:100px 1fr auto}
 @media(max-width:768px){.concert-item.has-action{grid-template-columns:1fr}}
 .concert-item.past{opacity:.6}
+.concerts-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,380px);gap:48px;align-items:start}
+.concerts-poster{position:sticky;top:140px}
+.concerts-poster img{display:block;width:100%;height:auto;border:1px solid var(--border);cursor:zoom-in;transition:border-color 400ms ease}
+.concerts-poster img:hover{border-color:var(--border-hi)}
+@media(max-width:900px){
+  .concerts-layout{grid-template-columns:1fr;gap:40px}
+  .concerts-poster{position:static;order:-1;max-width:420px}
+}
 .members-intro{display:block;margin-bottom:56px}
 .contact-name{font-family:var(--font-head);font-weight:800;font-size:clamp(2.6rem,6vw,4rem);letter-spacing:0.06em;line-height:1;color:var(--white)}
 .contact-place{font-size:1.2rem;letter-spacing:0.2em;color:var(--white-dim);margin-top:8px}
@@ -572,22 +580,28 @@ nav#navbar.dark .logo-dark{display:block!important}
       <h2 class="section-title">Koncerty</h2>
     </div>
 
+    <div class="concerts-layout">
+    <div class="concerts-main">
     <h3 class="concerts-sub reveal">nadcházející</h3>
     <div class="concerts-list reveal">
+      <div class="concert-item">
+        <div class="concert-date"><span class="concert-day">27</span><span class="concert-month">Listopad 2026</span></div>
+        <div class="concert-details"><h3>Rozsvícení školního parku v doprovodu The Pearls</h3><p>Zemědělská škola Opava · 17:30</p></div>
+      </div>
       <div class="concert-item has-action">
-        <div class="concert-date"><span class="concert-day">00</span><span class="concert-month">Měsíc 2026</span></div>
-        <div class="concert-details"><h3>Placeholder</h3><p>Místo konání</p></div>
-        <div class="concert-action"><a href="#" rel="noopener">Vstupenky</a></div>
+        <div class="concert-date"><span class="concert-day">12</span><span class="concert-month">Prosinec 2026</span></div>
+        <div class="concert-details"><h3>Předvánoční „Chill“</h3><p>Moravská kaple Domu umění, Opava · 16:00 a 19:00</p></div>
+        <div class="concert-action"><a href="mailto:thepearls005@gmail.com?subject=Vstupenky%20%E2%80%93%20P%C5%99edv%C3%A1no%C4%8Dn%C3%AD%20Chill" rel="noopener">Vstupenky</a></div>
       </div>
     </div>
+    <p class="concerts-empty reveal" style="margin-top:28px">Další nadcházející koncerty zatím nejsou naplánované.</p>
+    </div><!-- /concerts-main -->
 
-    <h3 class="concerts-sub reveal">uplynulé</h3>
-    <div class="concerts-list reveal">
-      <div class="concert-item past">
-        <div class="concert-date"><span class="concert-day">00</span><span class="concert-month">Měsíc 2026</span></div>
-        <div class="concert-details"><h3>Placeholder</h3><p>Místo konání</p></div>
-      </div>
-    </div>
+    <!-- Aktuální plakát (vpravo). Při změně plakátu stačí přepsat cestu v src a data-full. -->
+    <aside class="concerts-poster reveal">
+      <img src="images/gallery/PLAKATY/PREDVANOCNICHILL.jpeg" data-full="images/gallery/PLAKATY/PREDVANOCNICHILL.jpeg" alt="Aktuální plakát – The Pearls" loading="lazy">
+    </aside>
+    </div><!-- /concerts-layout -->
   </div>
 </section>
 
@@ -796,7 +810,7 @@ const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxClose = document.getElementById('lightboxClose');
 
-document.querySelectorAll('.gallery-item').forEach(item => {
+document.querySelectorAll('.gallery-item, .concerts-poster').forEach(item => {
   item.addEventListener('click', () => {
     const full = item.dataset.full || item.querySelector('img').src;
     lightboxImg.src = full;
